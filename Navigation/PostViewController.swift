@@ -12,11 +12,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGray4
-        let newPost = Post()
-        let titleLabel = UILabel()
-        titleLabel.text = newPost.title
-        titleLabel.font = UIFont.systemFont(ofSize: 17)
-        navigationItem.titleView = titleLabel
+        self.title = post.title
         self.navigationItem.backButtonTitle = "Назад"
         let infoImage = UIImage(systemName: "info.circle")
         let infoButton = UIBarButtonItem(image: infoImage, style: .done, target: self, action: #selector(buttonInfoClicked))

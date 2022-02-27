@@ -15,7 +15,7 @@ class FeedViewController: UIViewController {
         self.title = "Лента"
         let button = UIButton()
         self.view.addSubview(button)
-        button.setTitle("Открыть пост", for: .normal)
+        button.setTitle("Новый пост", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 12
         button.clipsToBounds = true
@@ -35,5 +35,7 @@ class FeedViewController: UIViewController {
 
 struct Post {
     
-    let title: String = "Пост"
+    let title: String
 }
+
+let post = Post(title: "Пост")
