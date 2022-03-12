@@ -8,11 +8,13 @@
 import UIKit
 
 class PostViewController: UIViewController {
+    
+    var post: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGray4
-        self.title = post.title
+        self.title = post ?? "Название отсутствует"
         self.navigationItem.backButtonTitle = "Назад"
         let infoImage = UIImage(systemName: "info.circle")
         let infoButton = UIBarButtonItem(image: infoImage, style: .done, target: self, action: #selector(buttonInfoClicked))

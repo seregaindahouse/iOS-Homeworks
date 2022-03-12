@@ -29,13 +29,13 @@ class FeedViewController: UIViewController {
     
     @objc func buttonClicked() {
         let postViewController = PostViewController()
+        let post = Post(title: "Новый пост")
+        postViewController.post = post.title
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
 }
 
 struct Post {
     
-    let title: String
+    let title: String?
 }
-
-let post = Post(title: "Пост")
