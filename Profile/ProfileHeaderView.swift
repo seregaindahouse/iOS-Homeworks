@@ -13,6 +13,7 @@ class ProfileHeaderView: UIView {
     var userNameLabel: UILabel
     var userStatusLabel: UILabel
     var userStatusButton: UIButton
+    var userStatusTextField: UITextField
     private var statusText: String
     
     init() {
@@ -21,6 +22,7 @@ class ProfileHeaderView: UIView {
         userNameLabel = UILabel()
         userStatusLabel = UILabel()
         userStatusButton = UIButton()
+        userStatusTextField = UITextField()
         statusText = ""
         super.init(frame: CGRect())
         
@@ -54,6 +56,19 @@ class ProfileHeaderView: UIView {
         userStatusButton.layer.shadowRadius = 4
         userStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         self.addSubview(userStatusButton)
+        
+        userStatusTextField.translatesAutoresizingMaskIntoConstraints = false
+        userStatusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        userStatusTextField.textColor = .black
+        userStatusTextField.backgroundColor = .white
+        userStatusTextField.placeholder = "В ожидании чего-то..."
+        userStatusTextField.layer.cornerRadius = 12
+        userStatusTextField.layer.borderWidth = 1
+        userStatusTextField.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        userStatusTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userStatusTextField.frame.height))
+        userStatusTextField.leftViewMode = .always
+        userStatusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        self.addSubview(userStatusTextField)
     }
     
     required init?(coder: NSCoder) {
@@ -79,12 +94,17 @@ class ProfileHeaderView: UIView {
             
             userStatusLabel.leftAnchor.constraint(equalTo: userPhotoImageView.rightAnchor, constant: 16),
             userStatusLabel.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16),
-            userStatusLabel.bottomAnchor.constraint(equalTo: userStatusButton.topAnchor, constant: -34),
+            userStatusLabel.bottomAnchor.constraint(equalTo: userStatusButton.topAnchor, constant: -64),
             
-            userStatusButton.topAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 16),
+            userStatusButton.topAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 48),
             userStatusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
             userStatusButton.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16),
-            userStatusButton.heightAnchor.constraint(equalToConstant: 50)
+            userStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            userStatusTextField.leftAnchor.constraint(equalTo: userPhotoImageView.rightAnchor, constant: 16),
+            userStatusTextField.bottomAnchor.constraint(equalTo: userStatusButton.topAnchor, constant: -16),
+            userStatusTextField.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16),
+            userStatusTextField.heightAnchor.constraint(equalToConstant: 40)
             ])
     }
     
@@ -92,6 +112,12 @@ class ProfileHeaderView: UIView {
         userStatusLabel.text = statusText
         if let textUserStatus = userStatusLabel.text {
             print(textUserStatus)
+        }
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        if let newStatusText = userStatusTextField.text {
+            statusText = newStatusText
         }
     }
 }
